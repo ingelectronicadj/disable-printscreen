@@ -1,0 +1,11 @@
+* {
+    font-family: Comfortaa;
+}
+
+.demo {
+    background: #abc;
+    width: 60%;
+    padding: 20px;
+    margin: auto;
+    margin-top: 10%;
+}

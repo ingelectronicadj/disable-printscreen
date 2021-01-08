@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="demo">
+        <h1>Disable printscreen</h1>
+        <p>Este es un test que permite el bloqueo de capturas de pantalla sobre un sitio web o gestor de contenidos como Moodle, Joomla, Woordpress, etc.</p>
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional</a>.
+    </div>
+
+    <!-- antes de cerrar el body -->
+    <!-- incluye la libreria sweatAlert2 para manejo de alertas y el script disablePrintScreen.js -->
+    <!--------------------------- COPY & PASTE ----------------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        /** PARA MANEJO DE ALERTAS **/
+        function myAlert(icon_alert, title_alert, text_alert) {
+            Swal.fire({
+                icon: icon_alert,
+                title: title_alert,
+                text: text_alert,
+                backdrop: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            });
+        }
+
+        /** PERSONALIZACION DE CONSOLA ANTE ACCESO DE HERRAMIENTAS PARA DESARROLLADOR (F12) **/
+        console.error('%cStop!', 'color: red;font-size:2.5rem;font-weight:bold;');  
+        console.warn('%cEsta es una función del navegador destinada a desarrolladores. Si alguien le dijo que copie y pegue algo aquí para habilitar una función o "piratear" la integridad del sitio, será reportado y se le bloquerá el acceso a su cuenta.', 'font-size:1.25rem;line-height:1.1;'); 
+
+        /** PARA DESHABILITAR CLIC DERECHO **/
+        document.oncontextmenu = function() {
+            myAlert('warning', 'Clic derecho deshabilitado!', 'Trabajamos en mejorar el nivel de seguridad de nuestro sitio.');
+            return false;
+        };
+
+        /** PARA DESHABILITAR CAPTURA DE PANTALLA **/
+        document.addEventListener('keyup', (e) => {
+            if (e.key == 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                myAlert('error', 'Capturas de pantalla deshabilitadas!', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
+            }
+        });
+
+        /** PARA DESHABILITAR IMPRESIONES o EXPORTAR A PDF CON EL COMANDO (CTRL+P) Y DESHABILITAR RECORTES DE PANTALLA (CTRL+SHIFT+S)**/
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key == 'p') {
+                myAlert('error', 'Esta sección no se permite imprimir o exportar en PDF', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
+                e.cancelBubble = true;
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            } else if (e.metaKey && e.shiftKey) {
+                Swal.fire({
+                    imageUrl: 'https://www.soy502.com/sites/default/files/styles/full_node/public/2018/Mar/08/screen_shot_2018-03-08_at_7.31.17_am.png',
+                    imageAlt: 'imagen de así te queria agarrar puerco',
+                    imageWidth: '50%',
+                    title: 'Recortes de pantalla detectados!',
+                    text: 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado',
+                    backdrop: true,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    width: '90%'
+                });
+            }
+        });
+    </script>
+    <!--------------------------- COPY & PASTE ----------------------------------------------------->
+
+</body>
+
+</html>
