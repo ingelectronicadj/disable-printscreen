@@ -29,23 +29,34 @@ document.addEventListener('keyup', (e) => {
 });
 
 /** PARA DESHABILITAR IMPRESIONES o EXPORTAR A PDF CON EL COMANDO (CTRL+P) Y DESHABILITAR RECORTES DE PANTALLA (CTRL+SHIFT+S)**/
+function cancelEvent() {
+    e.cancelBubble = true;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+}
+
 document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key == 'p') {
+    if (e.ctrlKey && e.key == 'p' || e.ctrlKey && e.key == 'P') {
         myAlert('error', 'Esta sección no se permite imprimir o exportar en PDF', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
-        e.cancelBubble = true;
-        e.preventDefault();
-        e.stopImmediatePropagation();
+        cancelEvent();
     } else if (e.metaKey && e.shiftKey) {
         Swal.fire({
-            imageUrl: 'https://www.soy502.com/sites/default/files/styles/full_node/public/2018/Mar/08/screen_shot_2018-03-08_at_7.31.17_am.png',
-            imageAlt: 'imagen de así te queria agarrar puerco',
-            imageWidth: '50%',
+            icon: 'warning',
             title: 'Recortes de pantalla detectados!',
             text: 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado',
             backdrop: true,
             allowOutsideClick: false,
             allowEscapeKey: false,
-            width: '90%'
+            grow: 'fullscreen'
         });
+    } else if (e.ctrlKey && e.key == 'c' || e.ctrlKey && e.key == 'C') {
+        myAlert('error', 'Esta sección no se permite copiar', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
+        cancelEvent();
+    } else if (e.ctrlKey && e.key == 'x' || e.ctrlKey && e.key == 'X') {
+        myAlert('error', 'Esta sección no se permite cortar', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
+        cancelEvent();
+    } else if (e.ctrlKey && e.key == 'v' || e.ctrlKey && e.key == 'V') {
+        myAlert('error', 'En esta sección no se permite pegar información', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
+        cancelEvent();
     }
 });
