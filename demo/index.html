@@ -63,16 +63,10 @@
         });
 
         /** PARA DESHABILITAR IMPRESIONES o EXPORTAR A PDF CON EL COMANDO (CTRL+P) Y DESHABILITAR RECORTES DE PANTALLA (CTRL+SHIFT+S)**/
-        function cancelEvent() {
-            e.cancelBubble = true;
-            e.preventDefault();
-            e.stopImmediatePropagation();
-        }
-
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key == 'p' || e.ctrlKey && e.key == 'P') {
                 myAlert('error', 'Esta sección no se permite imprimir o exportar en PDF', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
-                cancelEvent();
+                e.preventDefault();
             } else if (e.metaKey && e.shiftKey) {
                 Swal.fire({
                     icon: 'warning',
@@ -85,13 +79,13 @@
                 });
             } else if (e.ctrlKey && e.key == 'c' || e.ctrlKey && e.key == 'C') {
                 myAlert('error', 'Esta sección no se permite copiar', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
-                cancelEvent();
+                e.preventDefault();
             } else if (e.ctrlKey && e.key == 'x' || e.ctrlKey && e.key == 'X') {
                 myAlert('error', 'Esta sección no se permite cortar', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
-                cancelEvent();
+                e.preventDefault();
             } else if (e.ctrlKey && e.key == 'v' || e.ctrlKey && e.key == 'V') {
                 myAlert('error', 'En esta sección no se permite pegar información', 'Solicitamos no intentarlo de nuevo o su acceso será interrumpido y reportado');
-                cancelEvent();
+                e.preventDefault();
             }
         });
     </script>
